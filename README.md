@@ -10,3 +10,8 @@ mongoose官网
 http://mongoosejs.com/
 
 
+基础视频教程
+
+https://www.bilibili.com/video/av27140135/?p=17
+
+
