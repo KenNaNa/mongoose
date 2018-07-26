@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script type="text/javascript" src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+	<script type="text/javascript" src="https://cdn.bootcss.com/vue-resource/1.3.4/vue-resource.min.js"></script>
+	<style type="text/css" media="screen">
+		body{
+			padding:20px;
+		}
+	</style>
+</head>
+<body>
+<div id="app">
+<div id="note">
+	<div id='form'>
+		<textarea class="form-control" placeholder="文本" v-model="curText">
+			
+		</textarea>
+		<br/>
+		<br/>
+		<input type="text" class="form-control" placeholder="名字" v-model="curName">
+		<br/>
+		<span v-text="tips" ></span>
+		<br/>
+		<button type="button" @click='add'>留言</button>
+	</div>
+</div>
+<hr>
+<div id="notearea" v-show="noteList.length>0">
+	<div v-for="item in noteList">
+		<div class="text" >
+			留言: <span>{{ item.text }}</span>
+		</div>
+		<div class="info">
+			名字: <span>{{ item.name }}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+			时间: <span>{{ item.time }}</span>
+		</div>
+		<hr/>
+	</div>
+</div>
+</div>
+
+<script type="text/javascript">
+	new Vue({
+		el:'#app',
+		mounted(){
+			this.$nextTick(()=>{
+				this.initNote();
+			})
+		},
+		created(){
+			
+		},
+		data:{
+			noteList:[],
+			tips:'',
+			curName:'',
+			curText:''
+		},
+		methods:{
+			initNote(){
+				this.$http.post('/init',{},{emulateJSON:true}).then(res=>{
+					// console.log(res.body)
+					this.noteList = res.body;
+					console.log(this.noteList)
+				})
+				// console.log(	this.noteList)
+			},
+			add(){
+				console.log(this.noteList)
+				if(this.curName==='' || this.curText===''){
+					return this.tips = "当前名字和留言的文本不能为空";
+				}
+				console.log(this.curText)
+				this.$http.post('/add',{
+					name: this.curName,
+					text: this.curText
+				},{
+					emulateJSON: true
+				}).then(res=>{
+					this.tips="留言成功";
+					this.noteList.unshift(res.data);
+					this.curName = '';
+					this.curText = '';
+				})
+			}
+		}
+	})
+</script>
+</body>
+</html>
