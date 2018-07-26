@@ -1,13 +1,23 @@
 #封装一个mongodb的doa集合
 需要安装的依赖包如下
+
+
 npm install mongodb   
 文档连接  https://github.com/KenNaNa/node-mongodb-native
+
+
 npm install mongoose  
 文档链接  https://github.com/KenNaNa/mongoose
+
+
 npm install express   
 文档链接  https://www.npmjs.com/package/express
+
+
 npm install formidable  
 文档链接 https://www.npmjs.com/package/formidable
+
+
 npm install mongo
 
 
