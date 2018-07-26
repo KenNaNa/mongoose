@@ -48,3 +48,8 @@ app.js
 
 
 视频教程  https://www.bilibili.com/video/av13941591/?p=7
+
+
+
+留言界面的效果图
+https://github.com/KenNaNa/mongoose/blob/master/%E7%95%99%E8%A8%80%E6%9D%BF/%E7%95%99%E8%A8%80.png
